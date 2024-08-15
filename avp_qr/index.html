@@ -4,87 +4,53 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ดาวน์โหลด AVP QR Code</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
+      @import url('https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600&display=swap');
       body {
         font-family: 'Prompt', sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-        margin: 0;
-        background-color: #f0f0f0;
-      }
-
-      .download-container {
-        text-align: center;
-      }
-
-      .download-button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        font-size: 18px;
-        transition: background-color 0.3s;
-        cursor: pointer;
-      }
-
-      .download-button:hover {
-        background-color: #0056b3;
-      }
-
-      .preview-image {
-        margin-top: 20px;
-        max-width: 200px;
-        max-height: 200px;
-        border: 1px solid #ccc;
-        border-radius: 10px;
       }
     </style>
   </head>
 
-  <body>
-    <div class="">
-      <h1>AVP QR Code</h1>
-
-      <button class="download-button" onclick="downloadImage()">
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="text-center bg-white p-6 rounded-lg shadow-lg max-w-xs w-full">
+      <h1 class="text-2xl font-semibold text-gray-800 mb-4">AVP QR Code</h1>
+      
+      <button class="w-full py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors" onclick="downloadImage()">
         ดาวน์โหลด QR Code
       </button>
-      <br />
-      <br />
-      <img id="previewImage" class="" src="" alt="QR Code Preview" />
+      <img id="previewImage" class="w-full object-cover rounded-lg border border-gray-300" src="" alt="QR Code Preview" />
     </div>
 
     <script>
       function getQueryParam(param) {
-                  const urlParams = new URLSearchParams(window.location.search);
-                  return urlParams.get(param);
-              }
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(param);
+      }
 
-              function downloadImage() {
-                  const imageUrl = getQueryParam('link') || 'https://raw.githubusercontent.com/it-avp/avp_public_data/main/avp_qr/avp2000.png';
-                  fetch(imageUrl)
-                      .then(response => response.blob())
-                      .then(blob => {
-                          const url = window.URL.createObjectURL(blob);
-                          const a = document.createElement('a');
-                          a.style.display = 'none';
-                          a.href = url;
-                          a.download = 'qr_code.png';
-                          document.body.appendChild(a);
-                          a.click();
-                          window.URL.revokeObjectURL(url);
-                      })
-                      .catch(() => alert('เกิดข้อผิดพลาดในการดาวน์โหลดรูปภาพ กรุณาลองใหม่อีกครั้ง'));
-              }
+      function downloadImage() {
+        const imageUrl = getQueryParam('link') || 'https://raw.githubusercontent.com/it-avp/avp_public_data/main/avp_thank.gif';
+        fetch(imageUrl)
+          .then(response => response.blob())
+          .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = 'qr_code.png';
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+          })
+          .catch(() => alert('เกิดข้อผิดพลาดในการดาวน์โหลดรูปภาพ กรุณาลองใหม่อีกครั้ง'));
+      }
 
-              document.addEventListener('DOMContentLoaded', () => {
-                  const imageUrl = getQueryParam('link') || 'https://raw.githubusercontent.com/it-avp/avp_public_data/main/avp_qr/avp2000.png';
-                  const previewImage = document.getElementById('previewImage');
-                  previewImage.src = imageUrl;
-              });
+      document.addEventListener('DOMContentLoaded', () => {
+        const imageUrl = getQueryParam('link') || 'https://raw.githubusercontent.com/it-avp/avp_public_data/main/avp_thank.gif';
+        const previewImage = document.getElementById('previewImage');
+        previewImage.src = imageUrl;
+      });
     </script>
   </body>
 </html>
